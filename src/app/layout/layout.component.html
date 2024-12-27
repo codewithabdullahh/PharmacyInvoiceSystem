@@ -1,0 +1,158 @@
+
+<div id="layout-wrapper">
+  <header id="page-topbar">
+    <div class="navbar-header">
+      <div class="d-flex">
+        <div class="navbar-brand-box text-center navBrandShadow">
+          <a href="javascript:void(0);" class="logo logo-dark">
+            <span class="logo-sm">
+              <img src="assets/images/logo-light.png" alt="logo-light" height="20">
+            </span>
+            <span class="logo-lg">
+              <img src="assets/images/logo-light.png" alt="logo-light" height="20">
+            </span>
+          </a>
+
+          <a href="javascript:void(0);" class="logo logo-light">
+            <span class="logo-sm">
+              <!--<img src="assets/images/logo-light.png" alt="logo-light" height="20">-->
+            </span>
+            <span class="logo-lg">
+              <!--<img src="assets/images/logo-light.png" alt="logo-light" height="20">-->
+
+            </span>
+          </a>
+        </div>
+
+        <button type="button" (click)="onToggleMobileMenu()" class="btn btn-sm px-3 font-size-24 header-item waves-effect" id="vertical-menu-btn">
+          <i class="ri-menu-2-line align-middle"></i>
+        </button>
+
+        <div class="flex-1 overflow-hidden" style="margin:auto;">
+          <h5 class="mb-0">SA Traders Company</h5>
+          <p class="text-truncate font-size-13 mb-0"></p>
+        </div>
+
+      </div>
+
+      <div class="d-flex">
+
+        <div class="dropdown d-inline-block">
+          <button type="button" class="btn header-item noti-icon waves-effect" (click)="toggleFont()"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="ri-zoom-in-fill" *ngIf="isSmallFontChecked"></i>
+            <i class="ri-zoom-out-line" *ngIf="!isSmallFontChecked"></i>
+          </button>
+        </div>
+
+        <div class="dropdown d-inline-block">
+          <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-notifications-dropdown"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="ri-notification-3-line"></i>
+            <span class="noti-dot"></span>
+          </button>
+          <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
+               aria-labelledby="page-header-notifications-dropdown">
+            <div class="p-3">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h6 class="m-0"> Notifications </h6>
+                </div>
+                <div class="col-auto">
+                  <a href="#!" class="small"> View All</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dropdown d-inline-block user-dropdown">
+          <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
+                  data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" (click)="userMenu = !userMenu">
+            <div class="avatar-xs d-xl-inline-block">
+              <span class="avatar-title rounded-circle bg-soft-primary text-primary">
+                <i class="ri-user-3-line"></i>
+              </span>
+            </div>
+            <span class="d-none d-xl-inline-block ms-1">Welcome Mr. Azeem Tanveer</span>
+            <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+          </button>
+          <div class="dropdown-menu dropdown-menu-end" [class.show]="userMenu" style="left:auto;">
+            <a class="dropdown-item"><i class="ri-user-line align-middle me-1"></i>Waseem Tanveer</a>
+            <a class="dropdown-item d-block"><i class="ri-user-settings-line align-middle me-1"></i> Mediciencs Distributer</a>
+            <a class="dropdown-item" href="javascript:void(0);"><i class="ri-wallet-2-line align-middle me-1"></i> Profile</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item text-danger" href="javascript:void(0);" (click)="logout()"><i class="ri-shut-down-line align-middle me-1 text-danger"></i> Logout</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- ========== Left Sidebar Start ========== -->
+  <div class="vertical-menu">
+
+    <div data-simplebar class="h-100">
+
+      <div id="sidebar-menu">
+        <ul class="metismenu list-unstyled mm-show" id="side-menu">
+          <li class="menu-title">Menu</li>
+
+          <li routerLinkActive="mm-active">
+            <a routerLink="/main/company" class="waves-effect" (click)="toggleMenu()">
+              <i class="ri-contacts-fill"></i>
+              <span>Company</span>
+            </a>
+          </li>
+          <li routerLinkActive="mm-active">
+            <a routerLink="/main/customer" class="waves-effect" (click)="toggleMenu()">
+              <i class="ri-contacts-fill"></i>
+              <span>Customer</span>
+            </a>
+          </li>
+          <li routerLinkActive="mm-active">
+            <a routerLink="/main/product" class="waves-effect" (click)="toggleMenu()">
+              <i class="ri-contacts-fill"></i>
+              <span>Product</span>
+            </a>
+          </li>
+          <li routerLinkActive="mm-active">
+            <a routerLink="/main/searchBill" class="waves-effect" (click)="toggleMenu()">
+              <i class="ri-contacts-fill"></i>
+              <span>Bill</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- Left Sidebar End -->
+  <!-- ============================================================== -->
+  <!-- Start right Content here -->
+  <!-- ============================================================== -->
+  <div class="main-content">
+    <div class="page-content" [ngStyle]="{'zoom': !isSmallFontChecked ? '90%' : '100%'}">
+      <div class="container-fluid">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+    <footer class="footer">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-9">
+            Copyrights ©{{currentYear}}, All Rights Reserved -SA Tranders Company
+          </div>
+          <div class="col-sm-3">
+            <div class="text-sm-end d-none d-sm-block">
+              Design And Developed By <a href="javascript:void(0);" class="text-primary">Abdullah</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+  <!-- end main content-->
+
+</div>

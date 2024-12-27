@@ -1,0 +1,72 @@
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column
+}
+.customer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    margin: 0 50px;
+}
+.customer1{
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.customer2 {
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin-right: 30px;
+}
+/* Hide everything except the printable content when printing */
+@media print {
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column
+  }
+
+  .customer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    margin: 0 50px;
+  }
+
+  .customer1 {
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+
+  .customer2 {
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-right: 30px;
+  }
+  body * {
+    visibility: hidden;
+  }
+
+  #contentToDownload, #contentToDownload * {
+    visibility: visible;
+  }
+
+  #contentToDownload {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}
+

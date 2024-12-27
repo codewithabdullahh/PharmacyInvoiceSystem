@@ -1,0 +1,176 @@
+
+
+<div class="row">
+  <div class="col-lg-4">
+    <div class="row">
+      <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+          <h4 class="mb-sm-0">Customer</h4>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <form [formGroup]="customerForm" (ngSubmit)="onSubmit()" autocomplete="off">
+          <div class="row mb-4">
+            <div class="col-md-12 mb-2">
+              <label for="Name">Customer Name <span class="text-danger" style="font-weight: 800;">*</span></label>
+              <input type="text" class="form-control" id="validationCustom01" placeholder="Enter Customer Name" formControlName="customerName"
+                     [ngClass]="{ 'is-invalid': submitted &&  customerForm.controls['customerName'].errors}">
+              <div *ngIf="submitted && !customerForm.controls['customerName'].valid" class="invalid-feedback">
+                <span *ngIf="customerForm.controls['customerName'].hasError('required')"
+                      class="text-danger">
+                  Please enter name.
+                </span>
+                <span *ngIf="customerForm.controls['customerName'].hasError('maxlength')"
+                      class="text-danger">
+                  Max length is 100.
+                </span>
+                <span *ngIf="customerForm.controls['customerName'].hasError('pattern')"
+                      class="text-danger">
+                  Invalid name.
+                </span>
+              </div>
+            </div>
+            <div class="col-md-12 mb-2">
+              <label for="Name">Customer Code <span class="text-danger" style="font-weight: 800;">*</span></label>
+              <input type="text" class="form-control" id="validationCustom01" placeholder="Enter Customer Code" formControlName="customerCode"
+                     [ngClass]="{ 'is-invalid': submitted &&  customerForm.controls['customerCode'].errors}">
+              <div *ngIf="submitted && !customerForm.controls['customerCode'].valid" class="invalid-feedback">
+                <span *ngIf="customerForm.controls['customerCode'].hasError('required')"
+                      class="text-danger">
+                  Please enter code.
+                </span>
+                <span *ngIf="customerForm.controls['customerCode'].hasError('maxlength')"
+                      class="text-danger">
+                  Max length is 50.
+                </span>
+              </div>
+            </div>
+            <div class="col-md-12 mb-2">
+              <label for="Name">Customer Address <span class="text-danger" style="font-weight: 800;">*</span></label>
+              <input type="text" class="form-control" id="validationCustom01" placeholder="Enter Customer Address" formControlName="customerAddress"
+                     [ngClass]="{ 'is-invalid': submitted &&  customerForm.controls['customerAddress'].errors}">
+              <div *ngIf="submitted && !customerForm.controls['customerAddress'].valid" class="invalid-feedback">
+                <span *ngIf="customerForm.controls['customerAddress'].hasError('required')"
+                      class="text-danger">
+                  Please enter Address.
+                </span>
+                <span *ngIf="customerForm.controls['customerAddress'].hasError('maxlength')"
+                      class="text-danger">
+                  Max length is 250.
+                </span>
+                <span *ngIf="customerForm.controls['customerAddress'].hasError('pattern')"
+                      class="text-danger">
+                  Invalid name.
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="float-right">
+            <button type="submit" class="btn btn-success waves-effect waves-light float-end" [disabled]="isSubmitting">
+              <div *ngIf="!isSubmitting">
+                <i class="ri-save-3-line align-middle me-2"></i>
+                <span class="align-middle">{{Btntxt}}</span>
+              </div>
+              <div *ngIf="isSubmitting" role="status">
+                <span class="align-middle">Processing...</span>
+                <span class="spinner-border ms-1"></span>
+              </div>
+            </button>
+            <button class="btn btn-secondary waves-effect" type="reset" (click)="clear()">Clear</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-8">
+    <div class="row d-sm-flex align-items-center justify-content-between">
+      <div class="col-md-6 col-6">
+        <p class="mb-sm-0">Total Results: <span class="text-primary fw-bold">{{getTotal()}}</span></p>
+      </div>
+      <div class="col-md-6 col-6">
+        <div class="d-sm-flex align-items-center justify-content-between float-end">
+          <div class="app-search pt-0 pb-0 d-none d-lg-block float-end">
+            <div class="search-box ms-2">
+              <div class="position-relative">
+                <input type="text" class="form-control rounded"
+                       [(ngModel)]="searchFilter" (ngModelChange)="onSearchChange($event)" placeholder="Search...">
+                <i class="mdi mdi-magnify search-icon text-primary fw-bold"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="table-responsive table-responsive navbar-nav-scroll">
+        <table class="table table-bordered table-th-ptb table-td-ptb table-striped mb-0 table-nowrap">
+          <thead class="table bg-table-head text-center">
+            <tr>
+              <th>#</th>
+              <th class="text-center cur-p" (click)="sortTable('customerName')">
+                Customer Name
+                <i class="mdi py-0 px-1 text-Offwhite" [ngClass]="{'mdi-sort': sortColumn !== 'customerName',
+                       'mdi-sort-ascending': sortColumn === 'customerName' && sortDirection === 'asc',
+                       'mdi-sort-descending': sortColumn === 'customerName' && sortDirection === 'desc'}"></i>
+              </th>
+              <th class="text-center cur-p" (click)="sortTable('customerCode')">
+                Customer Code
+                <i class="mdi py-0 px-1 text-Offwhite" [ngClass]="{'mdi-sort': sortColumn !== 'customerCode',
+                       'mdi-sort-ascending': sortColumn === 'customerCode' && sortDirection === 'asc',
+                       'mdi-sort-descending': sortColumn === 'customerCode' && sortDirection === 'desc'}"></i>
+              </th>
+              <th class="text-center cur-p" (click)="sortTable('customerAddress')">
+                Customer Address
+                <i class="mdi py-0 px-1 text-Offwhite" [ngClass]="{'mdi-sort': sortColumn !== 'customerAddress',
+                       'mdi-sort-ascending': sortColumn === 'customerAddress' && sortDirection === 'asc',
+                       'mdi-sort-descending': sortColumn === 'customerAddress' && sortDirection === 'desc'}"></i>
+              </th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngIf="customerResponse.length==0 && !isGridLoading" [class.text-danger]="customerResponse.length==0">
+              <td colspan="12" class="text-center">No results found.</td>
+            </tr>
+            <tr *ngFor="let cus of customerResponse
+                    | setupSearchFilter: searchFilter
+                    | paginate: {itemsPerPage:15, currentPage: pageNo};
+                    let i=index;"
+                [class.tr-row-active]="selectedIndex === i">
+              <td class="text-center">
+                {{i+1}}
+              </td>
+              <td class="text-center">
+                {{cus.customerName}}
+              </td>
+              <td class="text-center">
+                {{cus.customerCode}}
+              </td>
+              <td class="text-center">
+                {{cus.customerAddress}}
+              </td>
+              <td class="text-center pt-0 pb-0 align-middle">
+                <a title="Edit Record" href="javascript:void(0);" class="me-3 text-primary" (click)="editCustomer(cus,i)">
+                  <i class="ri-edit-fill font-size-18"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="text-center my-3" *ngIf="isGridLoading">
+          <a href="javascript:void(0);" class="text-primary">
+            <i class="mdi mdi-loading mdi-spin font-size-20 align-middle me-2"></i> Please wait while loading...
+          </a>
+        </div>
+        <pagination-controls (pageChange)="pageNo = $event" class="pagination justify-content-end"></pagination-controls>
+      </div>
+    </div>
+  </div>
+</div>
+
+

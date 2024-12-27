@@ -1,0 +1,288 @@
+<div class="row mt-2">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header bg-navy text-white">
+        Customer
+      </div>
+      <div class="card-body">
+        <form [formGroup]="customerForm" onsubmit="save()">
+          <div class="row">
+            <div class="col-lg-4">
+              <div class=" mb-3">
+                <label for="Name">Customer Code<span class="text-danger">*</span></label>
+                <ng-select [items]="customerResponse"
+                           bindLabel="customerCode"
+                           bindValue="customerId"
+                           [formControlName]="'customerId'"
+                           placeholder="Please select"
+                           clearable="false"
+                           (change)="onChangeCustomer($event)"
+                           [ngClass]="{'is-invalid': submitted &&  customerForm.controls['customerId'].errors}">
+                </ng-select>
+                <div *ngIf="submitted && !customerForm.controls['customerId'].valid" class="invalid-feedback">
+                  <span *ngIf="customerForm.controls['customerId'].hasError('required')" class="text-danger">
+                    Please select customer code.
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 mb-2">
+              <label for="Name">Customer Name <span class="text-danger" style="font-weight: 800;">*</span></label>
+              <input type="text" class="form-control" id="validationCustom01" placeholder="Enter Customer Name" formControlName="customerName"
+                     [ngClass]="{ 'is-invalid': submitted &&  customerForm.controls['customerName'].errors}">
+              <div *ngIf="submitted && !customerForm.controls['customerName'].valid" class="invalid-feedback">
+                <span *ngIf="customerForm.controls['customerName'].hasError('required')"
+                      class="text-danger">
+                  Please enter name.
+                </span>
+                <span *ngIf="customerForm.controls['customerName'].hasError('maxlength')"
+                      class="text-danger">
+                  Max length is 100.
+                </span>
+                <span *ngIf="customerForm.controls['customerName'].hasError('pattern')"
+                      class="text-danger">
+                  Invalid name.
+                </span>
+              </div>
+            </div>
+            <div class="col-lg-4 mb-2">
+              <label for="Name">Customer Address <span class="text-danger" style="font-weight: 800;">*</span></label>
+              <input type="text" class="form-control" id="validationCustom01" placeholder="Enter Customer Name" formControlName="customerAddress"
+                     [ngClass]="{ 'is-invalid': submitted &&  customerForm.controls['customerAddress'].errors}">
+              <div *ngIf="submitted && !customerForm.controls['customerAddress'].valid" class="invalid-feedback">
+                <span *ngIf="customerForm.controls['customerAddress'].hasError('required')"
+                      class="text-danger">
+                  Please enter name.
+                </span>
+                <span *ngIf="customerForm.controls['customerAddress'].hasError('maxlength')"
+                      class="text-danger">
+                  Max length is 250.
+                </span>
+                <span *ngIf="customerForm.controls['customerAddress'].hasError('pattern')"
+                      class="text-danger">
+                  Invalid name.
+                </span>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header bg-navy text-white">
+        Product
+      </div>
+      <div class="card-body">
+        <form [formGroup]="productForm" (ngSubmit)="productSubmit()">
+          <div class="row">
+            <div class="col-md-3 mb-2">
+              <label for="Name">Quantity <span class="text-danger" style="font-weight: 800;">*</span></label>
+              <input type="number" #firstInput class="form-control" id="validationCustom01" placeholder="Enter Quantity" formControlName="quantity"
+                     [ngClass]="{ 'is-invalid': productSubmitted &&  productForm.controls['quantity'].errors}">
+              <div *ngIf="productSubmitted && !productForm.controls['quantity'].valid" class="invalid-feedback">
+                <span *ngIf="productForm.controls['quantity'].hasError('required')"
+                      class="text-danger">
+                  Please enter quantity.
+                </span>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class=" mb-3">
+                <label for="Name">Company Name<span class="text-danger">*</span></label>
+                <ng-select [items]="companyResponse"
+                           bindLabel="companyName"
+                           bindValue="companyId"
+                           [formControlName]="'companyId'"
+                           placeholder="Please select"
+                           clearable="false"
+                           (change)="onChangeCompany($event)"
+                           [ngClass]="{'is-invalid': productSubmitted &&  productForm.controls['companyId'].errors}">
+                </ng-select>
+                <div *ngIf="productSubmitted && !productForm.controls['companyId'].valid" class="invalid-feedback">
+                  <span *ngIf="productForm.controls['companyId'].hasError('required')" class="text-danger">
+                    Please select Company Name.
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class=" mb-3">
+                <label for="Name">Product Name<span class="text-danger">*</span></label>
+                <ng-select [items]="productDdlResponse"
+                           bindLabel="productName"
+                           bindValue="productId"
+                           [formControlName]="'productId'"
+                           placeholder="Please select"
+                           clearable="false"
+                           (change)="onChangeProduct($event)"
+                           [ngClass]="{'is-invalid': productSubmitted &&  productForm.controls['productId'].errors}">
+                </ng-select>
+                <div *ngIf="productSubmitted && !productForm.controls['productId'].valid" class="invalid-feedback">
+                  <span *ngIf="productForm.controls['productId'].hasError('required')" class="text-danger">
+                    Please select Product Name.
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 mb-2">
+              <label for="Name">Retail Prize <span class="text-danger" style="font-weight: 800;">*</span></label>
+              <input type="number" class="form-control" id="validationCustom01" placeholder="Enter Retail Prize" formControlName="retailPrize"
+                     [ngClass]="{ 'is-invalid': productSubmitted &&  productForm.controls['retailPrize'].errors}">
+              <div *ngIf="productSubmitted && !productForm.controls['retailPrize'].valid" class="invalid-feedback">
+                <span *ngIf="productForm.controls['retailPrize'].hasError('required')"
+                      class="text-danger">
+                  Please enter prize.
+                </span>
+              </div>
+            </div>
+            <div class="col-md-3 mb-2">
+              <label for="Name"> Purchase Prize <span class="text-danger" style="font-weight: 800;">*</span></label>
+              <input type="text" class="form-control" id="validationCustom01" placeholder="Enter Purchase Prize" formControlName="purchasePrize"
+                     [ngClass]="{ 'is-invalid': productSubmitted &&  productForm.controls['purchasePrize'].errors}">
+              <div *ngIf="productSubmitted && !productForm.controls['purchasePrize'].valid" class="invalid-feedback">
+                <span *ngIf="productForm.controls['purchasePrize'].hasError('required')"
+                      class="text-danger">
+                  Please Enter Purchase Prize.
+                </span>>
+                <span *ngIf="productForm.controls['purchasePrize'].hasError('pattern')"
+                      class="text-danger">
+                  Invalid Purchase Prize.
+                </span>
+              </div>
+            </div>
+            <div class="col-md-3 mb-2">
+              <label for="Name">Pack <span class="text-danger" style="font-weight: 800;">*</span></label>
+              <input type="text" class="form-control" id="validationCustom01" placeholder="Enter Pack " formControlName="pack"
+                     [ngClass]="{ 'is-invalid': productSubmitted &&  productForm.controls['pack'].errors}">
+              <div *ngIf="productSubmitted && !productForm.controls['pack'].valid" class="invalid-feedback">
+                <span *ngIf="productForm.controls['pack'].hasError('required')"
+                      class="text-danger">
+                  Please enter pack.
+                </span>
+                <span *ngIf="productForm.controls['pack'].hasError('maxlength')"
+                      class="text-danger">
+                  Max length is 100.
+                </span>
+                <span *ngIf="productForm.controls['pack'].hasError('pattern')"
+                      class="text-danger">
+                  Invalid pack.
+                </span>
+              </div>
+            </div>
+            <div class="col-md-3 mb-2">
+              <label for="Name"> Retail/Net <span class="text-danger" style="font-weight: 800;">*</span></label>
+              <input type="number" class="form-control" id="validationCustom01" placeholder="Enter Retail Net" formControlName="retail_Net"
+                     [ngClass]="{ 'is-invalid': productSubmitted &&  productForm.controls['retail_Net'].errors}">
+              <div *ngIf="productSubmitted && !productForm.controls['retail_Net'].valid" class="invalid-feedback">
+                <span *ngIf="productForm.controls['retail_Net'].hasError('required')"
+                      class="text-danger">
+                  Please Enter Retail/ net.
+                </span>
+                <span *ngIf="productForm.controls['retail_Net'].hasError('pattern')"
+                      class="text-danger">
+                  Invalid retail net.
+                </span>
+              </div>
+            </div>
+            <div class="col-md-3 mb-2">
+              <label for="Name"> Discount <span class="text-danger" style="font-weight: 800;">*</span></label>
+              <input type="number" class="form-control" id="validationCustom01" placeholder="Enter Discount" formControlName="discount"
+                     [ngClass]="{ 'is-invalid': productSubmitted &&  productForm.controls['discount'].errors}">
+              <div *ngIf="productSubmitted && !productForm.controls['discount'].valid" class="invalid-feedback">
+                <span *ngIf="productForm.controls['discount'].hasError('required')"
+                      class="text-danger">
+                  Please Enter Discount
+                </span>
+                <span *ngIf="productForm.controls['discount'].hasError('pattern')"
+                      class="text-danger">
+                  Invalid Discount.
+                </span>
+              </div>
+            </div>
+            <div class="col-md-2 mt-4">
+              <button type="submit" class="btn btn-success waves-effect waves-light me-4">
+                <div class="cur-p">
+                  <i class="ri-arrow-down-line align-middle me-2"></i>
+                  <span class="align-middle">{{productBtn}}</span>
+                </div>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="table-responsive table-responsive mt-4">
+    <table class="table table-bordered table-th-ptb table-td-ptb table-striped mb-0 ">
+      <thead class="table bg-table-head text-center">
+        <tr>
+          <th>Quantity</th>
+          <th>Company Name</th>
+          <th>Product Name</th>
+          <th>Retail Prize</th>
+          <th>Pack</th>
+          <th>Retail/Net</th>
+          <th>Discount</th>
+          <th>Amount</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="productSave.length==0" [class.text-danger]="productSave.length==0">
+          <td colspan="12" class="text-center">No producdt added yet.</td>
+        </tr>
+        <tr *ngFor="let pro of productSave;let i=index;">
+          <td class="text-center">
+            {{pro.quantity}}
+          </td>
+          <td class="text-center">
+            {{getCompanyNameById(pro.companyId)}}
+          </td>
+          <td class="text-center">
+            {{getProductNameById(pro.productId)}}
+          </td>
+          <td class="text-center">
+            {{pro.retailPrize}}
+          </td>
+          <td class="text-center">
+            {{pro.pack}}
+          </td>
+          <td class="text-center">
+            {{pro.retail_Net}}
+          </td>
+          <td class="text-center">
+            {{pro.discount}}
+          </td>
+          <td class="text-center">
+            {{pro.amount}}
+          </td>
+          <td class="text-center pt-0 pb-0 align-middle">
+            <a title="Edit Record" href="javascript:void(0);" class="me-3 text-primary" (click)="editProduct(pro,i)">
+              <i class="ri-edit-fill font-size-18"></i>
+            </a>
+            <a title="Delete Record" href="javascript:void(0);" class="me-3 text-danger" (click)="deleteProduct(i)">
+              <i class="ri-delete-bin-line font-size-18"></i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="row mb-3 mt-2">
+<div class="col-md-12 mb-1">
+  <button type="submit" class="btn btn-success waves-effect waves-light float-end" (click)="save()" [disabled]="isSubmitting">
+    <div *ngIf="!isSubmitting">
+      <i class="ri-save-3-line align-middle me-2"></i>
+      <span class="align-middle">Submit </span>
+    </div>
+    <div *ngIf="isSubmitting" role="status">
+      <span class="align-middle">Processing...</span>
+      <span class="spinner-border ms-1"></span>
+    </div>
+  </button>
+  <!--<button class="btn btn-secondary waves-effect" type="reset" (click)="clear()">Clear</button>-->
+</div>
+</div>
