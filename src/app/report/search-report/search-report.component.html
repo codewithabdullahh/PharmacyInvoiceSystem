@@ -100,7 +100,9 @@
                     <i class="mdi mdi-menu-left-outline"></i> Menu
                   </button>
                   <div class="dropdown-menu tableMenuOption" id="dropdownMenuContainer{{i}}" [class.show]="toggleMenuIndex === i" style="top:auto !important;">
-                    <a  href="javascript:void(0);" [routerLink]="['/viewBill',psr.reportId,psr.customerId]" class="dropdown-item">View Report </a>
+                    <a href="javascript:void(0);" [routerLink]="['/viewBill',psr.reportId,psr.customerId]" class="dropdown-item">View Report </a>
+                    <a href="javascript:void(0);" [routerLink]="['/main/addEditBill', psr.reportId, psr.customerId]" class="dropdown-item">Edit Report</a>
+
                   </div>
                 </div>
               </td>

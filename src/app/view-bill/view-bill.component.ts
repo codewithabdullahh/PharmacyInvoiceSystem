@@ -70,14 +70,19 @@ export class ViewBillComponent {
   //  }
   //}
   printContent(): void {
-    const printContents = document.getElementById('contentToDownload')?.innerHTML;
-    if (printContents) {
-      const originalContents = document.body.innerHTML;
-      document.body.innerHTML = printContents;
-      window.print();
-      document.body.innerHTML = originalContents;
+    const contentToPrint = document.getElementById('contentToDownload');
+    if (contentToPrint) {
+      const originalContents = document.body.innerHTML; // Save original content
+      const printContents = contentToPrint.innerHTML;
+
+      document.body.innerHTML = printContents; // Replace body with printable content
+      window.print(); // Open print dialog
+
+      document.body.innerHTML = originalContents; // Restore original content
+      window.location.reload(); // Reload to restore functionality
     }
   }
+
   printContents(): void {
     window.print();
   }

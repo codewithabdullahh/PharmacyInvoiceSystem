@@ -17,10 +17,12 @@ export interface ReportData {
   customerId: string;
   quantity: number;
   productName: string;
+  companyName: string;
   pack: string;
   retailPrize: number;
   retail_Net: number; 
   discount: number;
+  bonus: number;
   amount: number;
   createdOn: Date;
   totalPrice: number;

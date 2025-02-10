@@ -86,6 +86,10 @@
                       class="text-danger">
                   Please enter quantity.
                 </span>
+                <span *ngIf="productForm.controls['quantity'].hasError('min')"
+                      class="text-danger">
+                  Minimun Value is 1.
+                </span>
               </div>
             </div>
             <div class="col-lg-3">
@@ -111,7 +115,7 @@
               <div class=" mb-3">
                 <label for="Name">Product Name<span class="text-danger">*</span></label>
                 <ng-select [items]="productDdlResponse"
-                           bindLabel="productName"
+                           bindLabel="productNamePack"
                            bindValue="productId"
                            [formControlName]="'productId'"
                            placeholder="Please select"
@@ -199,6 +203,25 @@
                       class="text-danger">
                   Invalid Discount.
                 </span>
+                <span *ngIf="productForm.controls['discount'].hasError('max')"
+                      class="text-danger">
+                  Max discount is 100.
+                </span>
+                <span *ngIf="productForm.controls['discount'].hasError('min')"
+                      class="text-danger">
+                  Min discount is 0.
+                </span>
+              </div>
+            </div>
+            <div class="col-md-3 mb-2">
+              <label for="Name"> Bonus </label>
+              <input type="number" class="form-control" id="validationCustom01" placeholder="Enter Bounus" formControlName="bonus"
+                     [ngClass]="{ 'is-invalid': productSubmitted &&  productForm.controls['bonus'].errors}">
+              <div *ngIf="productSubmitted && !productForm.controls['bonus'].valid" class="invalid-feedback">
+                <span *ngIf="productForm.controls['bonus'].hasError('required')"
+                      class="text-danger">
+                  Please Enter bonus
+                </span>
               </div>
             </div>
             <div class="col-md-2 mt-4">
@@ -226,6 +249,7 @@
           <th>Retail/Net</th>
           <th>Discount</th>
           <th>Amount</th>
+          <th>Bonus</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -257,6 +281,9 @@
           </td>
           <td class="text-center">
             {{pro.amount}}
+          </td>
+          <td class="text-center">
+            {{pro.bonus}}
           </td>
           <td class="text-center pt-0 pb-0 align-middle">
             <a title="Edit Record" href="javascript:void(0);" class="me-3 text-primary" (click)="editProduct(pro,i)">

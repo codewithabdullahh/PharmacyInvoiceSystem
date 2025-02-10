@@ -94,6 +94,7 @@ export class SearchReportComponent {
     }
   }
   addNewBill() {
-    this.router.navigate(['/main/addEditBill', 0,]);
+    this.router.navigate(['/main/addEditBill', '', '']);
   }
+
 }

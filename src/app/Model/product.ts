@@ -16,6 +16,31 @@ export interface Product {
   purchasePrize: number;
   pack: string;
   retail_Net: number;
+
+  productNamePack: string;
 }
+export interface ReportEditResponse {
+  customerCode: string;
+  customerName: string;
+  customerAddress: string;
+  reportId: string; // Using string for GUID
+  customerId: string;
+  reportData: ReportDataEditResponse[];
+}
+
+export interface ReportDataEditResponse {
+  reportDataId: string; // Using string for GUID
+  quantity: number;
+  productName: string;
+  pack: string;
+  retailPrize: number;
+  retailNet: number; // Adjusted naming convention
+  discount: number;
+  bonus: number;
+  amount: number;
+  createdOn: Date;
+  totalPrice: number;
+}
+
 
 

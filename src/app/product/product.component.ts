@@ -40,7 +40,7 @@ export class ProductComponent {
 
   ngOnInit(): void {
     this.productForm = this.formBuilder.group({
-      companyId: new FormControl('Please select'),
+      companyId: new FormControl([], Validators.required),
       productId: new FormControl(''),
       productName: new FormControl('', Validators.compose([Validators.maxLength(100), Validators.required, Validators.pattern(ValidationPatterns.string)])),
       retailPrize: new FormControl('', Validators.compose([Validators.required])),
@@ -169,7 +169,7 @@ export class ProductComponent {
     this.Btntxt = "Add Product";
     this.searchFilter = '';
     this.productForm.reset({
-      companyId: 'Please select',
+      companyId: [],
       productId: '',
       productName: '',
       retailPrize: '',

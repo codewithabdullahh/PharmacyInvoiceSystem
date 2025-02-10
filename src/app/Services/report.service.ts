@@ -17,6 +17,17 @@ export class ReportService {
     };
     return this.apiService.post(`Product/insertBill`, body);
   }
+  updateReport(data: any): Observable<any> {
+    debugger;
+    var body = {
+      ...data
+    }
+    return this.apiService.put(`Product/updateBill/${data.reportId}/${data.customerId}`, body);
+  }
+  getEditReportData(reportId: any, customerId: any): Observable<any> {
+    debugger;
+    return this.apiService.get(`Product/getEditReport/${reportId}/${customerId}`);
+  }
   getReportForSearch(data: any, pageNo: number, pageSize: number) {
     debugger;
     let params = new HttpParams()
@@ -24,7 +35,7 @@ export class ReportService {
       .set('PageSize', pageSize)
       .set('CustomerCode', data.customerCode)
       .set('CustomerName', data.customerName)
-      .set('IssueData', data.issueData)
+      .set('IssueDate', data.issueDate)
 
     return this.apiService.partiallyGet('Product/getSearchReport', params);
   }
